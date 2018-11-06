@@ -1,0 +1,13 @@
+---
+- !ruby/object:Reader
+  name: Liona
+  email: l@l.com
+  city: Dnepr
+  street: Polya
+  house: 5
+- !ruby/object:Reader
+  name: Liona2
+  email: l@l.com
+  city: Dnepr
+  street: Polya
+  house: 5

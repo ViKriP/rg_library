@@ -11,7 +11,7 @@ module Conf
   end
 
   def ex_i(var, val = "")
-    raise "#{self.class} #{val} not valid" unless var.is_a?(Integer) && !var > 0
+    raise "#{self.class} #{val} not valid" unless var.is_a?(Integer) && var > 0
     return var
   end
 

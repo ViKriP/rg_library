@@ -5,11 +5,17 @@ lib = Library.new
 lib.author_add("Maxima","Good man")
 lib.author_add("Kim","Good man")
 
-lib.test
+auth1 = lib.author("Maxima")
+
 #lib.author_del("Maxima")
 
-#lib.author_load
+lib.reader_add("Liona","l@l.com","Dnepr","Polya",5)
 
+reader1 = lib.reader("Liona")
+
+#lib.reader_del("Liona")
+
+lib.test
 
 #author = Author.new("Tom","Good man")
 #author.some_method
