@@ -1,1 +1,6 @@
---- []
+---
+- !ruby/object:Book
+  title: Helper
+  author: !ruby/object:Author
+    name: Maxima
+    biography: Good man

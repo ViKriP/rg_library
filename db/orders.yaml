@@ -1,0 +1,27 @@
+---
+- !ruby/object:Order
+  book: !ruby/object:Book
+    title: Helper
+    author: !ruby/object:Author
+      name: Maxima
+      biography: Good man
+  reader: !ruby/object:Reader
+    name: Liona
+    email: l@l.com
+    city: Dnepr
+    street: Polya
+    house: 5
+  date: 2018-11-06 17:02:11.643793562 +02:00
+- !ruby/object:Order
+  book: !ruby/object:Book
+    title: Helper
+    author: !ruby/object:Author
+      name: Maxima
+      biography: Good man
+  reader: !ruby/object:Reader
+    name: Liona
+    email: l@l.com
+    city: Dnepr
+    street: Polya
+    house: 5
+  date: 2018-11-06 17:02:15.988669515 +02:00

@@ -30,7 +30,7 @@ class Library
     puts authors
     puts readers
     puts books
-    puts books
+    puts orders
   end
 
   def save
@@ -110,8 +110,7 @@ class Library
     @books.each { |book_i| found = true if book_i.title == title}
 
     unless found
-      book_new = Book.new(title, author)
-      @books.push(book_new) unless found
+      @books.push(Book.new(title, author)) unless found
       File.open(BOOKS_DB, 'w') { |file| file.write(@books.to_yaml) }
     end
   end
@@ -122,7 +121,9 @@ class Library
     end
   end
 
-  def order
-    
+  def order_save(order)
+    ex_cl(order, Order)
+    @orders.push(order)
+    File.open(ORDERS_DB, 'w') { |file| file.write(@orders.to_yaml) }
   end
 end
