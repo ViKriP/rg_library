@@ -1,0 +1,19 @@
+---
+- !ruby/object:Author
+  name: Tam
+  biography: Good man
+- !ruby/object:Author
+  name: Tom
+  biography: Good man
+- !ruby/object:Author
+  name: Kam
+  biography: Good man
+- !ruby/object:Author
+  name: Max
+  biography: Good man
+- !ruby/object:Author
+  name: Maxima
+  biography: Good man
+- !ruby/object:Author
+  name: Kim
+  biography: Good man

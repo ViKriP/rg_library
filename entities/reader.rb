@@ -1,7 +1,7 @@
-require File.expand_path("../../", __FILE__)+'/conf/ex'
+require File.expand_path("../../", __FILE__)+'/conf/conf'
 
 class Reader
-  include Ex
+  include Conf
 
   attr_reader :name, :email, :sity, :street, :house
   

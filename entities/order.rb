@@ -1,7 +1,7 @@
-require File.expand_path("../../", __FILE__)+'/conf/ex'
+require File.expand_path("../../", __FILE__)+'/conf/conf'
 
 class Order
-  include Ex
+  include Conf
 
   attr_reader :book, :reader, :date
   
