@@ -15,7 +15,21 @@ reader1 = lib.reader("Liona")
 
 #lib.reader_del("Liona")
 
+lib.book_add("Helper", auth1)
+
+book1 = lib.book("Helper")
+
+#lib.book_del("Helper")
+
+
+
+
 lib.test
+
+
+
+
+
 
 #author = Author.new("Tom","Good man")
 #author.some_method

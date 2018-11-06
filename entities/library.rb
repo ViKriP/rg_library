@@ -22,13 +22,15 @@ class Library
   def open
     @authors = YAML.load_file(AUTHORS_DB) if File.exist?(AUTHORS_DB)
     @readers = YAML.load_file(READERS_DB) if File.exist?(READERS_DB)
-    #@books = YAML.load_file(BOOKS_DB) if File.exist?(BOOKS_DB)
-    #@orders = YAML.load_file(ORDERS_DB) if File.exist?(ORDERS_DB)
+    @books = YAML.load_file(BOOKS_DB) if File.exist?(BOOKS_DB)
+    @orders = YAML.load_file(ORDERS_DB) if File.exist?(ORDERS_DB)
   end
 
   def test
     puts authors
     puts readers
+    puts books
+    puts books
   end
 
   def save
@@ -96,10 +98,31 @@ class Library
     end
   end
 
-  def book_add(title, author)
-    #author = Author.new("Ivan", "good")
-    @books = Book.new(title, author)
-    File.open(AUTHORS_DB, 'a') { |file| file.write(@books.to_yaml) }
+  def book(title)
+    found = nil
+    @books.each { |book_i| found = book_i if book_i.title == title}
+    return found
   end
 
+  def book_add(title, author)
+    found = false
+
+    @books.each { |book_i| found = true if book_i.title == title}
+
+    unless found
+      book_new = Book.new(title, author)
+      @books.push(book_new) unless found
+      File.open(BOOKS_DB, 'w') { |file| file.write(@books.to_yaml) }
+    end
+  end
+
+  def book_del(title)
+    if @books.reject! { |book_i| book_i.title == title } != nil
+      File.open(BOOKS_DB, 'w') { |file| file.write(@books.to_yaml) }
+    end
+  end
+
+  def order
+    
+  end
 end
