@@ -17,3 +17,33 @@
 - !ruby/object:Author
   name: Kim
   biography: Good man
+- !ruby/object:Author
+  name: Sergey Dovlatov
+  biography: ''
+- !ruby/object:Author
+  name: Vladimir Nabokov
+  biography: ''
+- !ruby/object:Author
+  name: Lev Tolstoy
+  biography: ''
+- !ruby/object:Author
+  name: Gustave Flaubert
+  biography: ''
+- !ruby/object:Author
+  name: Mark Twain
+  biography: ''
+- !ruby/object:Author
+  name: George Eliot
+  biography: ''
+- !ruby/object:Author
+  name: Herman Melville
+  biography: ''
+- !ruby/object:Author
+  name: Charles Dickens
+  biography: ''
+- !ruby/object:Author
+  name: Fedor Dostoevsky
+  biography: ''
+- !ruby/object:Author
+  name: Jane Austen
+  biography: ''

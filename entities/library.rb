@@ -37,15 +37,26 @@ class Library
 
   end
 
-  def top_reader
+  def top_reader(quantity = 1)
+    top_readers = Hash.new
 
+    @orders.each do
+      |ord| top_readers.key?(ord.reader) ? top_readers[ord.reader] = top_readers[ord.reader]+1 : top_readers[ord.reader] = 1 
+    end
+
+    a = top_readers.sort{|a,b| b[1]<=>a[1]}[0..quantity-1]
+
+    #puts "Reader name - #{a[0][0].name}"
+    (0..ex_i(quantity)-1).each do |i| 
+      puts "Reader name - #{a[i][0].name} | count book - #{a[i][1]}"
+    end
   end
 
   def most_popular_books
 
   end
 
-  def number_of_readers_of_the_most_popular_books
+  def number_of_readers_of_the_most_popular_books(some_quantity = 3)
 
   end
 
@@ -58,14 +69,16 @@ class Library
   def author_add(name, biography = "")
     found = false
 
-    @authors.each { |author_i| found = true if author_i.name == name}
+    @authors.each { |author_i| found = author_i if author_i.name == name}
 
     unless found
       author_new = Author.new(name, biography)
       @authors.push(author_new) unless found
       File.open(AUTHORS_DB, 'w') { |file| file.write(@authors.to_yaml) }
+      return author_new
+    else
+      return found
     end
-    #open()
   end
 
   def author_del(name)
@@ -83,12 +96,15 @@ class Library
   def reader_add(name, email, city, street, hous)
     found = false
 
-    @readers.each { |reader_i| found = true if reader_i.name == name}
+    @readers.each { |reader_i| found = reader_i if reader_i.name == name}
 
     unless found
       reader_new = Reader.new(name, email, city, street, hous)
       @readers.push(reader_new) unless found
       File.open(READERS_DB, 'w') { |file| file.write(@readers.to_yaml) }
+      return reader_new
+    else
+      return found
     end
   end
 
@@ -107,11 +123,15 @@ class Library
   def book_add(title, author)
     found = false
 
-    @books.each { |book_i| found = true if book_i.title == title}
+    @books.each { |book_i| found = book_i if book_i.title == title}
 
     unless found
-      @books.push(Book.new(title, author)) unless found
+      book_new = Book.new(title, author)
+      @books.push(book_new) unless found
       File.open(BOOKS_DB, 'w') { |file| file.write(@books.to_yaml) }
+      return book_new
+     else
+      return found
     end
   end
 
@@ -124,6 +144,12 @@ class Library
   def order_save(order)
     ex_cl(order, Order)
     @orders.push(order)
+    File.open(ORDERS_DB, 'w') { |file| file.write(@orders.to_yaml) }
+    return order
+  end
+
+  def order_db_clear
+    @orders.clear
     File.open(ORDERS_DB, 'w') { |file| file.write(@orders.to_yaml) }
   end
 end

@@ -11,3 +11,69 @@
   city: Dnepr
   street: Polya
   house: 5
+- !ruby/object:Reader
+  name: Artur
+  email: l@gmail.com
+  city: Dnepr
+  street: St. Polya
+  house: 5
+- !ruby/object:Reader
+  name: Svetlana
+  email: d@gmail.com
+  city: Dnepr
+  street: St. Korolenko
+  house: 15
+- !ruby/object:Reader
+  name: Lena
+  email: l@gmail.com
+  city: Dnepr
+  street: St. Polya
+  house: 5
+- !ruby/object:Reader
+  name: Den
+  email: d@gmail.com
+  city: Dnepr
+  street: St. Korolenko
+  house: 15
+- !ruby/object:Reader
+  name: Kira
+  email: k@gmail.com
+  city: Dnepr
+  street: St. Havana
+  house: 20
+- !ruby/object:Reader
+  name: Marta
+  email: m@gmail.com
+  city: Dnepr
+  street: St. Glinka
+  house: 7
+- !ruby/object:Reader
+  name: Max
+  email: mm@gmail.com
+  city: Dnepr
+  street: St. Glinka
+  house: 18
+- !ruby/object:Reader
+  name: Ron
+  email: r@gmail.com
+  city: Dnepr
+  street: St. Glinka
+  house: 44
+- !ruby/object:Reader
+  name: Alf
+  email: a@gmail.com
+  city: Dnepr
+  street: St. Zalivnaya
+  house: 88
+- !ruby/object:Reader
+  name: Ivan
+  email: i@gmail.com
+  city: Dnepr
+  street: St. Zalivnaya
+  house: 9
+- !ruby/object:Reader
+  name: Dina
+  email: dd@gmail.com
+  city: Dnepr
+  street: St. Korolenko
+  house: 22
