@@ -8,6 +8,5 @@ class Book
   def initialize(title, author)
     @title = ex_s(title, "title")
     @author = ex_cl(author, Author)
-
   end
 end

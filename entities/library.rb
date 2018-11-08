@@ -15,7 +15,7 @@ class Library
     @books = []
     @readers = []
     @orders = []
-    
+
     open()
   end
 
@@ -26,38 +26,73 @@ class Library
     @orders = YAML.load_file(ORDERS_DB) if File.exist?(ORDERS_DB)
   end
 
-  def test
-    puts authors
-    puts readers
-    puts books
-    puts orders
-  end
-
-  def save
-
-  end
-
   def top_reader(quantity = 1)
     top_readers = Hash.new
 
-    @orders.each do
-      |ord| top_readers.key?(ord.reader) ? top_readers[ord.reader] = top_readers[ord.reader]+1 : top_readers[ord.reader] = 1 
+    @orders.each do |ord|
+      top_readers.key?(ord.reader) ? top_readers[ord.reader] = top_readers[ord.reader]+1 : top_readers[ord.reader] = 1 
     end
 
     a = top_readers.sort{|a,b| b[1]<=>a[1]}[0..quantity-1]
 
-    #puts "Reader name - #{a[0][0].name}"
+    puts "----------"
+    puts "Top readers\n\r"
     (0..ex_i(quantity)-1).each do |i| 
       puts "Reader name - #{a[i][0].name} | count book - #{a[i][1]}"
     end
   end
 
-  def most_popular_books
+  def top_book(quantity)
+    top_books = Hash.new
 
+    @orders.each do |ord|
+      top_books.key?(ord.book) ? top_books[ord.book] = top_books[ord.book]+1 : top_books[ord.book] = 1 
+    end
+
+    a = top_books.sort{|a,b| b[1]<=>a[1]}[0..quantity-1]
+
+    return a
   end
 
-  def number_of_readers_of_the_most_popular_books(some_quantity = 3)
+  def most_popular_books(quantity = 1)
+    a = top_book(quantity)
 
+    puts "----------"
+    puts "Most popular books\n\r"
+    (0..ex_i(quantity)-1).each do |i| 
+      puts "Book title - #{a[i][0].title} | number taken - #{a[i][1]}"
+    end
+  end
+
+  def number_of_readers_of_the_most_popular_books(quantity = 3)
+    a = top_book(quantity)
+
+    readers_top_books = []
+    r_book = []
+
+    @orders.each do |ord|
+      (0..ex_i(quantity)-1).each do |i|
+        readers_top_books.push(ord.reader) && r_book.push(a[i][0].title) if ord.book == a[i][0]
+      end 
+    end
+
+    puts "----------"
+    puts "Statistics readers of the most popular books\n\r"
+    puts "Books - #{quantity}\n\r"
+    puts r_book.uniq
+    
+    puts "\n\rALL Readers top books - #{readers_top_books.count}\n\r"
+    readers_top_books.each do |r| 
+      puts "Reader - #{r.name}"
+    end
+
+    arr = readers_top_books.uniq
+ 
+    puts "\n\rUNIQ Readers top books - #{arr.count}\n\r"
+    arr.each do |r| 
+      puts "Reader - #{r.name}"
+    end
+    puts "\n\rNumber of readers of the most popular books = #{arr.count}"
   end
 
   def author(name)
@@ -87,7 +122,7 @@ class Library
     end
   end
 
-  def reader(name)
+  def reader_name(name)
     found = nil
     @readers.each { |reader_i| found = reader_i if reader_i.name == name}
     return found
