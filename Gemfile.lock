@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/pocke/unreleased-rubocop-config
+  revision: 7494e0f8c1ecce7dba45f0008d763c0549c328f4
+  specs:
+    unreleased-rubocop-config (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -32,6 +38,7 @@ PLATFORMS
 DEPENDENCIES
   fasterer
   rubocop
+  unreleased-rubocop-config!
 
 BUNDLED WITH
    1.17.1

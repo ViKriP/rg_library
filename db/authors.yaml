@@ -1,29 +1,5 @@
 ---
 - !ruby/object:Author
-  name: Tam
-  biography: Good man
-- !ruby/object:Author
-  name: Tom
-  biography: Good man
-- !ruby/object:Author
-  name: Kam
-  biography: Good man
-- !ruby/object:Author
-  name: Max
-  biography: Good man
-- !ruby/object:Author
-  name: Maxima
-  biography: Good man
-- !ruby/object:Author
-  name: Kim
-  biography: Good man
-- !ruby/object:Author
-  name: Sergey Dovlatov
-  biography: ''
-- !ruby/object:Author
-  name: Vladimir Nabokov
-  biography: ''
-- !ruby/object:Author
   name: Lev Tolstoy
   biography: ''
 - !ruby/object:Author
@@ -46,4 +22,10 @@
   biography: ''
 - !ruby/object:Author
   name: Jane Austen
+  biography: ''
+- !ruby/object:Author
+  name: Sergey Dovlatov
+  biography: ''
+- !ruby/object:Author
+  name: Vladimir Nabokov
   biography: ''

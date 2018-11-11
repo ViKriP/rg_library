@@ -1,20 +1,5 @@
 ---
 - !ruby/object:Book
-  title: Helper
-  author: !ruby/object:Author
-    name: Maxima
-    biography: Good man
-- !ruby/object:Book
-  title: Suitcase
-  author: !ruby/object:Author
-    name: Sergey Dovlatov
-    biography: ''
-- !ruby/object:Book
-  title: Lolita
-  author: !ruby/object:Author
-    name: Vladimir Nabokov
-    biography: ''
-- !ruby/object:Book
   title: War and Peace
   author: &1 !ruby/object:Author
     name: Lev Tolstoy
@@ -56,4 +41,14 @@
   title: Emma
   author: !ruby/object:Author
     name: Jane Austen
+    biography: ''
+- !ruby/object:Book
+  title: Suitcase
+  author: !ruby/object:Author
+    name: Sergey Dovlatov
+    biography: ''
+- !ruby/object:Book
+  title: Lolita
+  author: !ruby/object:Author
+    name: Vladimir Nabokov
     biography: ''
