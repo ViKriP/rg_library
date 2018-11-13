@@ -7,7 +7,7 @@ READERS_DB = ROOTDIR + '/db/readers.yaml'
 ORDERS_DB = ROOTDIR + '/db/orders.yaml'
 
 require 'yaml'
-require ROOTDIR + '/conf/conf'
+require ROOTDIR + '/conf/validation'
 require ROOTDIR + '/entities/author'
 require ROOTDIR + '/entities/book'
 require ROOTDIR + '/entities/order'

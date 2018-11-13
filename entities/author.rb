@@ -2,12 +2,12 @@
 
 # This class describes the entity of type a author.
 class Author
-  include Conf
+  include Validation
 
   attr_reader :name, :biography
 
   def initialize(name, biography = '')
-    @name = ex_s(name, 'name')
+    @name = validate_string(name, 'name')
     @biography = biography
   end
 

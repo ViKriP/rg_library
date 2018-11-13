@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require File.expand_path(__dir__) + '/autoloader'
+require_relative 'autoloader'
 
 author1 = Author.new('Sergey Dovlatov')
 author2 = Author.new('Vladimir Nabokov')

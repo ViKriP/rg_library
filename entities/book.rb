@@ -2,13 +2,13 @@
 
 # This class describes the entity of type a book.
 class Book
-  include Conf
+  include Validation
 
   attr_reader :title, :author
 
   def initialize(title, author)
-    @title = ex_s(title, 'title')
-    @author = ex_cl(author, Author)
+    @title = validate_string(title, 'title')
+    @author = validate_class(author, Author)
   end
 
   def ==(other)

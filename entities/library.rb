@@ -2,7 +2,7 @@
 
 # This class allows you to perform library statistics.
 class Library
-  include Conf
+  include Validation
 
   attr_accessor :authors, :readers, :books, :orders, :readers_top_books
 
@@ -12,10 +12,10 @@ class Library
     @readers = []
     @orders = []
 
-    open
+    load_datas
   end
 
-  def open
+  def load_datas
     @authors = YAML.load_file(AUTHORS_DB) if File.exist?(AUTHORS_DB)
     @readers = YAML.load_file(READERS_DB) if File.exist?(READERS_DB)
     @books = YAML.load_file(BOOKS_DB) if File.exist?(BOOKS_DB)
@@ -33,7 +33,7 @@ class Library
                                 end
     end
 
-    top_readers.sort { |a, b| b[1] <=> a[1] }[0...quantity]
+    top_readers.sort_by { |a| -a[1] }[0...validate_integer(quantity)]
   end
 
   def most_popular_books(quantity = 1)
@@ -47,7 +47,7 @@ class Library
                             end
     end
 
-    top_books.sort { |a, b| b[1] <=> a[1] }[0...ex_i(quantity)]
+    top_books.sort_by { |a| -a[1] }[0...validate_integer(quantity)]
   end
 
   def number_of_readers_of_the_most_popular_books(quantity = 3)
@@ -56,7 +56,7 @@ class Library
     @readers_top_books = []
 
     @orders.each do |ord|
-      (0...ex_i(quantity)).each do |i|
+      (0...validate_integer(quantity)).each do |i|
         @readers_top_books.push(ord.reader) if ord.book == a[i][0]
       end
     end
@@ -83,12 +83,12 @@ class Library
   end
 
   def author_add(author_input)
-    ex_cl(author_input, Author)
+    validate_class(author_input, Author)
     entities_add(entities_input: author_input, path_db: AUTHORS_DB, arr: @authors)
   end
 
   def author_del(author_out)
-    ex_cl(author_out, Author)
+    validate_class(author_out, Author)
     entities_del(author_out, AUTHORS_DB, @authors)
   end
 
@@ -99,12 +99,12 @@ class Library
   end
 
   def reader_add(reader_input)
-    ex_cl(reader_input, Reader)
+    validate_class(reader_input, Reader)
     entities_add(entities_input: reader_input, path_db: READERS_DB, arr: @readers)
   end
 
   def reader_del(reader_out)
-    ex_cl(reader_out, Reader)
+    validate_class(reader_out, Reader)
     entities_del(reader_out, READERS_DB, @readers)
   end
 
@@ -115,17 +115,17 @@ class Library
   end
 
   def book_add(book_input)
-    ex_cl(book_input, Book)
+    validate_class(book_input, Book)
     entities_add(entities_input: book_input, path_db: BOOKS_DB, arr: @books)
   end
 
   def book_del(book_out)
-    ex_cl(book_out, Book)
+    validate_class(book_out, Book)
     entities_del(reader_out, BOOKS_DB, @books)
   end
 
   def order_save(order)
-    ex_cl(order, Order)
+    validate_class(order, Order)
     @orders.push(order)
     File.open(ORDERS_DB, 'w') { |file| file.write(@orders.to_yaml) }
     order
@@ -138,15 +138,15 @@ class Library
 
   def top_readers_stats(top_readers)
     a1 = top_reader(top_readers)
-    out = "\n\r==========\n\rTop readers\n\r"
-    (0...ex_i(top_readers)).each { |i| out += "Reader name - #{a1[i][0].name} | count book - #{a1[i][1]}\n\r" }
+    out = "\n\r==========\n\rTop readers\n\r\n\r"
+    (0...validate_integer(top_readers)).each { |i| out += "Reader name - #{a1[i][0].name} | count book - #{a1[i][1]}\n\r" }
     out
   end
 
   def most_popular_books_stats(top_books)
     a2 = most_popular_books(top_books)
     out = "----------\n\rMost popular books\n\r\n\r"
-    (0...ex_i(top_books)).each { |i| out += "Book title - #{a2[i][0].title} | number taken - #{a2[i][1]}\n\r" }
+    (0...validate_integer(top_books)).each { |i| out += "Book title - #{a2[i][0].title} | number taken - #{a2[i][1]}\n\r" }
     out
   end
 
@@ -155,11 +155,11 @@ class Library
 
     out = "----------\n\rStatistics readers of the most popular books\n\r\n\r"
     out += most_popular_books_stats(books_count)
-    out += stats
+    out += readers_stats
     out
   end
 
-  def stats
+  def readers_stats
     out = "\n\rALL Readers top books - #{@readers_top_books.count}\n\r\n\r"
 
     arr = @readers_top_books.each { |r| out += "Reader - #{r.name}\n\r" }.uniq
