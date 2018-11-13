@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ROOTDIR = File.expand_path(__dir__)
 AUTHORS_DB = ROOTDIR + '/db/authors.yaml'
 BOOKS_DB = ROOTDIR + '/db/books.yaml'

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# This class describes the entity of type a reader.
 class Reader
   include Conf
 

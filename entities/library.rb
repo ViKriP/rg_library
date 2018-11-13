@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
+# This class allows you to perform library statistics.
 class Library
   include Conf
 
-  attr_accessor :authors, :readers, :books, :orders
+  attr_accessor :authors, :readers, :books, :orders, :readers_top_books
 
   def initialize
     @authors = []
@@ -23,7 +26,11 @@ class Library
     top_readers = {}
 
     @orders.each do |ord|
-      top_readers.key?(ord.reader) ? top_readers[ord.reader] = top_readers[ord.reader] + 1 : top_readers[ord.reader] = 1
+      top_readers[ord.reader] = if top_readers.key?(ord.reader)
+                                  top_readers[ord.reader] + 1
+                                else
+                                  top_readers[ord.reader] = 1
+                                end
     end
 
     top_readers.sort { |a, b| b[1] <=> a[1] }[0...quantity]
@@ -33,7 +40,11 @@ class Library
     top_books = {}
 
     @orders.each do |ord|
-      top_books.key?(ord.book) ? top_books[ord.book] = top_books[ord.book] + 1 : top_books[ord.book] = 1
+      top_books[ord.book] = if top_books.key?(ord.book)
+                              top_books[ord.book] + 1
+                            else
+                              top_books[ord.book] = 1
+                            end
     end
 
     top_books.sort { |a, b| b[1] <=> a[1] }[0...ex_i(quantity)]
@@ -42,58 +53,16 @@ class Library
   def number_of_readers_of_the_most_popular_books(quantity = 3)
     a = most_popular_books(quantity)
 
-    readers_top_books = []
+    @readers_top_books = []
 
     @orders.each do |ord|
       (0...ex_i(quantity)).each do |i|
-        readers_top_books.push(ord.reader) if ord.book == a[i][0]
+        @readers_top_books.push(ord.reader) if ord.book == a[i][0]
       end
     end
 
-    readers_top_books.uniq.size
-  end
-
-  def statistics(top_readers, top_books, top_reader_books)
-    a1 = top_reader(top_readers)
-    puts "\n\r=========="
-    puts "Top readers\n\r"
-    (0...ex_i(top_readers)).each do |i|
-      puts "Reader name - #{a1[i][0].name} | count book - #{a1[i][1]}"
-    end
-
-    a2 = most_popular_books(top_books)
-    puts '----------'
-    puts "Most popular books\n\r"
-    (0...ex_i(top_books)).each do |i|
-      puts "Book title - #{a2[i][0].title} | number taken - #{a2[i][1]}"
-    end
-
-    a2 = most_popular_books(top_reader_books)
-
-    readers_top_books = []
-    r_book = []
-
-    @orders.each do |ord|
-      (0...ex_i(top_reader_books)).each do |i|
-        readers_top_books.push(ord.reader) && r_book.push(a2[i][0].title) if ord.book == a2[i][0]
-      end
-    end
-
-    puts '----------'
-    puts "Statistics readers of the most popular books\n\r"
-    puts "Books - #{top_reader_books}\n\r"
-    puts r_book.uniq
-    puts "\n\rALL Readers top books - #{readers_top_books.count}\n\r"
-    readers_top_books.each do |r|
-      puts "Reader - #{r.name}"
-    end
-
-    arr = readers_top_books.uniq
-    puts "\n\rUNIQ Readers top books - #{arr.count}\n\r"
-    arr.each do |r|
-      puts "Reader - #{r.name}"
-    end
-    puts "\n\rNumber of readers of the most popular books = #{arr.count}"
+    number_of_readers = @readers_top_books
+    number_of_readers.uniq.size
   end
 
   def entities_add(entities_input:, path_db:, arr:)
@@ -165,5 +134,41 @@ class Library
   def order_db_clear
     @orders.clear
     File.open(ORDERS_DB, 'w') { |file| file.write(@orders.to_yaml) }
+  end
+
+  def top_readers_stats(top_readers)
+    a1 = top_reader(top_readers)
+    out = "\n\r==========\n\rTop readers\n\r"
+    (0...ex_i(top_readers)).each { |i| out += "Reader name - #{a1[i][0].name} | count book - #{a1[i][1]}\n\r" }
+    out
+  end
+
+  def most_popular_books_stats(top_books)
+    a2 = most_popular_books(top_books)
+    out = "----------\n\rMost popular books\n\r\n\r"
+    (0...ex_i(top_books)).each { |i| out += "Book title - #{a2[i][0].title} | number taken - #{a2[i][1]}\n\r" }
+    out
+  end
+
+  def top_readers_books_stats(books_count)
+    number_of_readers_of_the_most_popular_books(books_count)
+
+    out = "----------\n\rStatistics readers of the most popular books\n\r\n\r"
+    out += most_popular_books_stats(books_count)
+    out += stats
+    out
+  end
+
+  def stats
+    out = "\n\rALL Readers top books - #{@readers_top_books.count}\n\r\n\r"
+
+    arr = @readers_top_books.each { |r| out += "Reader - #{r.name}\n\r" }.uniq
+
+    out += "\n\rUNIQ Readers top books - #{arr.count}\n\r\n\r"
+
+    arr.each { |r| out += "Reader - #{r.name}\n\r" }
+
+    out += "\n\rNumber of readers of the most popular books = #{arr.count}"
+    out
   end
 end

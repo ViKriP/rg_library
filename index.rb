@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path(__dir__) + '/autoloader'
 
 author1 = Author.new('Sergey Dovlatov')
@@ -32,9 +34,9 @@ reader4_lib = lib.reader_name('Svetlana')
 lib.order_save(Order.new(book1_lib, reader1_lib))
 lib.order_save(Order.new(book2_lib, reader2_lib))
 lib.order_save(Order.new(lib.book_title('Suitcase'), lib.reader_name('Artur'),
-                                         Time.local(2017, 1, 10, 20, 15, 1)))
+                         Time.local(2017, 1, 10, 20, 15, 1)))
 lib.order_save(Order.new(book4_lib, reader4_lib,
-  Time.local(2017, 1, 10, 20, 15, 1)))
+                         Time.local(2017, 1, 10, 20, 15, 1)))
 
 order5 = Order.new(book4_lib, reader4_lib)
 
@@ -46,4 +48,6 @@ puts lib.most_popular_books(4)
 
 puts lib.number_of_readers_of_the_most_popular_books(4)
 
-lib.statistics(4, 4, 4)
+puts lib.top_readers_stats(4)
+puts lib.most_popular_books_stats(4)
+puts lib.top_readers_books_stats(4)

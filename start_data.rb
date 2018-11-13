@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 author1 = Author.new('Lev Tolstoy')
 author2 = Author.new('Gustave Flaubert')
 author3 = Author.new('Mark Twain')
@@ -83,7 +85,7 @@ lib.order_save(Order.new(lib.book_title('Crime and Punishment'), lib.reader_name
                          Time.local(2017, 6, 5, 20, 15, 1)))
 lib.order_save(Order.new(lib.book_title('Moby Dick'), lib.reader_name('Alf'), Time.local(2017, 6, 6, 20, 15, 1)))
 lib.order_save(Order.new(lib.book_title('Crime and Punishment'), lib.reader_name('Ron'),
-Time.local(2017, 7, 4, 20, 15, 1)))
+                         Time.local(2017, 7, 4, 20, 15, 1)))
 lib.order_save(Order.new(lib.book_title('Crime and Punishment'), lib.reader_name('Ivan'),
                          Time.local(2017, 7, 12, 20, 15, 1)))
 lib.order_save(Order.new(lib.book_title('Emma'), lib.reader_name('Dina'), Time.local(2017, 8, 9, 20, 15, 1)))

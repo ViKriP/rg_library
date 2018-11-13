@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# This module is intended for validation and advanced settings.
 module Conf
   def ex_s(var, val = '')
     raise "#{self.class} #{val} not valid" unless var.is_a?(String) && !var.empty?

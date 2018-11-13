@@ -174,7 +174,7 @@
     city: Dnepr
     street: St. Polya
     house: 5
-  date: 2018-11-11 18:58:01.143162955 +02:00
+  date: 2018-11-13 11:56:22.299179433 +02:00
 - !ruby/object:Order
   book: &18 !ruby/object:Book
     title: Lolita
@@ -187,7 +187,7 @@
     city: Dnepr
     street: St. Korolenko
     house: 15
-  date: 2018-11-11 18:58:01.152517824 +02:00
+  date: 2018-11-13 11:56:22.308347931 +02:00
 - !ruby/object:Order
   book: *16
   reader: *17
@@ -199,4 +199,4 @@
 - !ruby/object:Order
   book: *18
   reader: *19
-  date: 2018-11-11 18:58:01.185848171 +02:00
+  date: 2018-11-13 11:56:22.336909790 +02:00
