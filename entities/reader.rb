@@ -1,17 +1,25 @@
 # frozen_string_literal: true
 
-# This class describes the entity of type a reader.
 class Reader
   include Validation
 
   attr_reader :name, :email, :city, :street, :house
 
   def initialize(name, email, sity, street, house)
-    @name = validate_string(name, 'name')
-    @email = validate_string(email, 'email')
-    @city = validate_string(sity, 'city')
-    @street = validate_string(street, 'street')
-    @house = validate_integer(house, 'house')
+    validate(name, email, sity, street, house)
+    @name = name
+    @email = email
+    @city = sity
+    @street = street
+    @house = house
+  end
+
+  def validate(name, email, sity, street, house)
+    [name, email, sity, street].map do |el|
+      validate_type(el, String)
+      validate_empty(el)
+    end
+    validate_type(house, Integer)
   end
 
   def ==(other)

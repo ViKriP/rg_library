@@ -1,5 +1,5 @@
 Metrics/LineLength:
-  Max: 123
+  Max: 100
 
-Metrics/ClassLength:
-  Max: 133
+Style/Documentation:
+  Enabled: false

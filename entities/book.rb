@@ -1,14 +1,20 @@
 # frozen_string_literal: true
 
-# This class describes the entity of type a book.
 class Book
   include Validation
 
   attr_reader :title, :author
 
   def initialize(title, author)
-    @title = validate_string(title, 'title')
-    @author = validate_class(author, Author)
+    validate(title, author)
+    @title = title
+    @author = author
+  end
+
+  def validate(title, author)
+    validate_type(title, String)
+    validate_empty(title)
+    validate_type(author, Author)
   end
 
   def ==(other)
