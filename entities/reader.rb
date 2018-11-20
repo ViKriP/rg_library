@@ -20,6 +20,7 @@ class Reader
       validate_empty(el)
     end
     validate_type(house, Integer)
+    validate_positive(house)
   end
 
   def ==(other)

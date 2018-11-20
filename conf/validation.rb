@@ -8,4 +8,8 @@ module Validation
   def validate_empty(string)
     raise ArgumentError if string.empty?
   end
+
+  def validate_positive(num)
+    raise ArgumentError if num.negative?
+  end
 end
