@@ -4,11 +4,11 @@ module Statistics
   include Validation
 
   def top_reader_stats(orders, quantity)
-    orders.group_by(&:reader).sort_by { |_key, value| -value.count }.first(quantity).to_h.keys
+    orders.group_by(&:reader).sort_by { |_key, value| value.count }.reverse.first(quantity).to_h.keys
   end
 
   def most_popular_books_stats(orders, quantity)
-    orders.group_by(&:book).sort_by { |_key, value| -value.count }.first(quantity).to_h.keys
+    orders.group_by(&:book).sort_by { |_key, value| value.count }.reverse.first(quantity).to_h.keys
   end
 
   def number_readers_top_books_stats(orders, quantity)
