@@ -11,22 +11,21 @@ class Library
     @books = []
     @readers = []
     @orders = []
-
     load_datas
   end
 
   def load_datas
-    @authors = YAML.load_file(AUTHORS_DB) if File.exist?(AUTHORS_DB)
-    @readers = YAML.load_file(READERS_DB) if File.exist?(READERS_DB)
-    @books = YAML.load_file(BOOKS_DB) if File.exist?(BOOKS_DB)
-    @orders = YAML.load_file(ORDERS_DB) if File.exist?(ORDERS_DB)
+    @authors = load_yml(AUTHORS_DB)
+    @readers = load_yml(READERS_DB)
+    @books = load_yml(BOOKS_DB)
+    @orders = load_yml(ORDERS_DB)
   end
 
   def save
-    File.open(AUTHORS_DB, 'w') { |file| file.write(@authors.to_yaml) }
-    File.open(READERS_DB, 'w') { |file| file.write(@readers.to_yaml) }
-    File.open(BOOKS_DB, 'w') { |file| file.write(@books.to_yaml) }
-    File.open(ORDERS_DB, 'w') { |file| file.write(@orders.to_yaml) }
+    save_yml(AUTHORS_DB, @authors)
+    save_yml(READERS_DB, @readers)
+    save_yml(BOOKS_DB, @books)
+    save_yml(ORDERS_DB, @orders)
   end
 
   def add_entity(entities_input:, arr:)
@@ -69,5 +68,15 @@ class Library
 
   def number_readers_top_books(quantity = 3)
     number_readers_top_books_stats(@orders, quantity)
+  end
+
+  private
+
+  def load_yml(path)
+    File.exist?(path) ? YAML.load_file(path) : []
+  end
+
+  def save_yml(path, arr)
+    File.open(path, 'w') { |file| file.write(arr.to_yaml) }
   end
 end
