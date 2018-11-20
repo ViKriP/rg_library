@@ -16,17 +16,17 @@ order2 = Order.new(book2, reader2, Time.local(2017, 1, 5, 20, 15, 1))
 
 lib = Library.new
 
-lib.author_add(author1)
-lib.author_add(author2)
+lib.add_author(author1)
+lib.add_author(author2)
 
-lib.book_add(book1)
-lib.book_add(book2)
+lib.add_book(book1)
+lib.add_book(book2)
 
-lib.reader_add(reader1)
-lib.reader_add(reader2)
+lib.add_reader(reader1)
+lib.add_reader(reader2)
 
-lib.order_add(order1)
-lib.order_add(order2)
+lib.add_order(order1)
+lib.add_order(order2)
 
 puts lib.top_reader(4)
 puts lib.most_popular_books(4)

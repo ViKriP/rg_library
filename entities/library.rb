@@ -29,30 +29,30 @@ class Library
     File.open(ORDERS_DB, 'w') { |file| file.write(@orders.to_yaml) }
   end
 
-  def entities_add(entities_input:, arr:)
+  def add_entity(entities_input:, arr:)
     found = nil
     arr.each { |entities| found = entities if entities == entities_input }
     found || arr.push(entities_input) && entities_input
   end
 
-  def author_add(author_input)
+  def add_author(author_input)
     validate_type(author_input, Author)
-    entities_add(entities_input: author_input, arr: @authors)
+    add_entity(entities_input: author_input, arr: @authors)
   end
 
-  def reader_add(reader_input)
+  def add_reader(reader_input)
     validate_type(reader_input, Reader)
-    entities_add(entities_input: reader_input, arr: @readers)
+    add_entity(entities_input: reader_input, arr: @readers)
   end
 
-  def book_add(book_input)
+  def add_book(book_input)
     validate_type(book_input, Book)
-    entities_add(entities_input: book_input, arr: @books)
+    add_entity(entities_input: book_input, arr: @books)
   end
 
-  def order_add(order_input)
+  def add_order(order_input)
     validate_type(order_input, Order)
-    entities_add(entities_input: order_input, arr: @orders)
+    add_entity(entities_input: order_input, arr: @orders)
   end
 
   def order_db_clear
