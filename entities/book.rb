@@ -16,8 +16,4 @@ class Book
     validate_empty(title)
     validate_type(author, Author)
   end
-
-  def ==(other)
-    title == other.title
-  end
 end

@@ -53,58 +53,24 @@ order21 = Order.new(book9, reader7, Time.local(2017, 9, 11, 20, 15, 1))
 
 lib = Library.new
 
-lib.add_author(author1)
-lib.add_author(author8)
-lib.add_author(author2)
-lib.add_author(author3)
-lib.add_author(author4)
-lib.add_author(author5)
-lib.add_author(author6)
-lib.add_author(author7)
-lib.add_author(author8)
+lib.db_clear
 
-lib.add_book(book1)
-lib.add_book(book2)
-lib.add_book(book3)
-lib.add_book(book4)
-lib.add_book(book5)
-lib.add_book(book6)
-lib.add_book(book7)
-lib.add_book(book8)
-lib.add_book(book9)
+lib.add_entity(author1)
+lib.add_entity(author2)
+lib.add_entity(author3)
+lib.add_entity(author4)
+lib.add_entity(author5)
+lib.add_entity(author6)
+lib.add_entity(author7)
+lib.add_entity(author8)
 
-lib.add_reader(reader1)
-lib.add_reader(reader2)
-lib.add_reader(reader3)
-lib.add_reader(reader4)
-lib.add_reader(reader5)
-lib.add_reader(reader6)
-lib.add_reader(reader7)
-lib.add_reader(reader8)
-lib.add_reader(reader9)
+lib.add_entity(book1, book2, book3, book4, book5, book6, book7, book8, book9)
 
-lib.order_db_clear
+lib.add_entity(reader1, reader2, reader3, reader4, reader5, reader6, reader7, reader8, reader9)
 
-lib.add_order(order1)
-lib.add_order(order2)
-lib.add_order(order3)
-lib.add_order(order4)
-lib.add_order(order5)
-lib.add_order(order6)
-lib.add_order(order7)
-lib.add_order(order8)
-lib.add_order(order9)
-lib.add_order(order10)
-lib.add_order(order11)
-lib.add_order(order12)
-lib.add_order(order13)
-lib.add_order(order14)
-lib.add_order(order15)
-lib.add_order(order16)
-lib.add_order(order17)
-lib.add_order(order18)
-lib.add_order(order19)
-lib.add_order(order20)
-lib.add_order(order21)
+lib.add_entity(order1, order2, order3, order4, order5, order4, order5,
+               order6, order7, order8, order9, order10, order11, order12,
+               order13, order14, order15, order16, order17, order18, order19,
+               order20, order21)
 
 lib.save

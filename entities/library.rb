@@ -28,34 +28,26 @@ class Library
     save_yml(ORDERS_DB, @orders)
   end
 
-  def add_entity(entities_input:, arr:)
-    found = nil
-    arr.each { |entities| found = entities if entities == entities_input }
-    found || arr.push(entities_input) && entities_input
+  def add_entity(*entities)
+    entities.each do |entity|
+      case entity
+      when Author
+        @authors.push(entity)
+      when Reader
+        @readers.push(entity)
+      when Book
+        @books.push(entity)
+      when Order
+        @orders.push(entity)
+      end
+    end
   end
 
-  def add_author(author_input)
-    validate_type(author_input, Author)
-    add_entity(entities_input: author_input, arr: @authors)
-  end
-
-  def add_reader(reader_input)
-    validate_type(reader_input, Reader)
-    add_entity(entities_input: reader_input, arr: @readers)
-  end
-
-  def add_book(book_input)
-    validate_type(book_input, Book)
-    add_entity(entities_input: book_input, arr: @books)
-  end
-
-  def add_order(order_input)
-    validate_type(order_input, Order)
-    add_entity(entities_input: order_input, arr: @orders)
-  end
-
-  def order_db_clear
-    File.open(ORDERS_DB, 'w') { |file| file.write(@orders.clear.to_yaml) }
+  def db_clear
+    clear_yml(AUTHORS_DB, @authors)
+    clear_yml(READERS_DB, @readers)
+    clear_yml(BOOKS_DB, @books)
+    clear_yml(ORDERS_DB, @orders)
   end
 
   def top_reader(quantity = 1)
@@ -78,5 +70,9 @@ class Library
 
   def save_yml(path, arr)
     File.open(path, 'w') { |file| file.write(arr.to_yaml) }
+  end
+
+  def clear_yml(path, arr)
+    File.open(path, 'w') { |file| file.write(arr.clear.to_yaml) }
   end
 end

@@ -15,8 +15,4 @@ class Author
     validate_type(name, String)
     validate_empty(name)
   end
-
-  def ==(other)
-    name == other.name
-  end
 end

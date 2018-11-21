@@ -22,8 +22,4 @@ class Reader
     validate_type(house, Integer)
     validate_positive(house)
   end
-
-  def ==(other)
-    name == other.name
-  end
 end
