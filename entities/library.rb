@@ -11,15 +11,13 @@ class Library
     @books = []
     @readers = []
     @orders = []
-    @entities_lib = {}
+    @entities_lib = Hash[AUTHORS_DB => :@authors, READERS_DB => :@readers,
+                         BOOKS_DB => :@books, ORDERS_DB => :@orders]
     load_datas
   end
 
   def load_datas
-    @entities_lib = Hash[AUTHORS_DB => @authors = load_yml(AUTHORS_DB),
-                         READERS_DB => @readers = load_yml(BOOKS_DB),
-                         BOOKS_DB => @books = load_yml(ORDERS_DB),
-                         ORDERS_DB => @orders = load_yml(ORDERS_DB)]
+    @entities_lib.each_pair { |key, val| load_yml(key, val) }
   end
 
   def save
@@ -55,15 +53,15 @@ class Library
 
   private
 
-  def load_yml(path)
-    File.exist?(path) ? YAML.load_file(path) : []
+  def load_yml(path, arr)
+    instance_variable_set(arr, File.exist?(path) ? YAML.load_file(path) : [])
   end
 
   def save_yml(path, arr)
-    File.open(path, 'w') { |file| file.write(arr.to_yaml) }
+    File.open(path, 'w') { |file| file.write(instance_variable_get(arr).to_yaml) }
   end
 
   def clear_yml(path, arr)
-    File.open(path, 'w') { |file| file.write(arr.clear.to_yaml) }
+    File.open(path, 'w') { |file| file.write(instance_variable_get(arr).clear.to_yaml) }
   end
 end
