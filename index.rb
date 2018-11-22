@@ -18,7 +18,7 @@ lib = Library.new
 
 lib.add_entity(author1)
 
-lib.add_entity(author2, book1, book2, order1)
+lib.add_entity(author2, book1, book2, reader1, reader2, order1)
 
 lib.add_entity(order2)
 

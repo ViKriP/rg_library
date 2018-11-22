@@ -4,50 +4,41 @@ class Library
   include Validation
   include Statistics
 
-  attr_accessor :authors, :readers, :books, :orders
+  attr_accessor :authors, :readers, :books, :orders, :entities_lib
 
   def initialize
     @authors = []
     @books = []
     @readers = []
     @orders = []
+    @entities_lib = {}
     load_datas
   end
 
   def load_datas
-    @authors = load_yml(AUTHORS_DB)
-    @readers = load_yml(READERS_DB)
-    @books = load_yml(BOOKS_DB)
-    @orders = load_yml(ORDERS_DB)
+    @entities_lib = Hash[AUTHORS_DB => @authors = load_yml(AUTHORS_DB),
+                         READERS_DB => @readers = load_yml(BOOKS_DB),
+                         BOOKS_DB => @books = load_yml(ORDERS_DB),
+                         ORDERS_DB => @orders = load_yml(ORDERS_DB)]
   end
 
   def save
-    save_yml(AUTHORS_DB, @authors)
-    save_yml(READERS_DB, @readers)
-    save_yml(BOOKS_DB, @books)
-    save_yml(ORDERS_DB, @orders)
+    @entities_lib.each_pair { |key, val| save_yml(key, val) }
+  end
+
+  def clear_db
+    @entities_lib.each_pair { |key, val| clear_yml(key, val) }
   end
 
   def add_entity(*entities)
     entities.each do |entity|
       case entity
-      when Author
-        @authors.push(entity)
-      when Reader
-        @readers.push(entity)
-      when Book
-        @books.push(entity)
-      when Order
-        @orders.push(entity)
+      when Author then @authors.push(entity)
+      when Reader then @readers.push(entity)
+      when Book then @books.push(entity)
+      when Order then @orders.push(entity)
       end
     end
-  end
-
-  def db_clear
-    clear_yml(AUTHORS_DB, @authors)
-    clear_yml(READERS_DB, @readers)
-    clear_yml(BOOKS_DB, @books)
-    clear_yml(ORDERS_DB, @orders)
   end
 
   def top_reader(quantity = 1)
